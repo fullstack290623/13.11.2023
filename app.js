@@ -30,7 +30,8 @@ app.get('/api/users/:id', (request, response) => {
 app.post('/api/users', (request, response) => {
     const new_user = request.body
     const updated_user = crud.post(new_user)
-    response.json(updated_user)
+    response.status(201).json(updated_user)
+    
 })
 // PUT
 app.put('/api/users/:id', (request, response) => {
@@ -57,7 +58,7 @@ app.delete('/api/users/:id', (request, response) => {
     const user_id = parseInt(request.params.id)
     const deleted = crud.delete_by_id(user_id)
     if (deleted) { 
-        response.json({ "status": `user with id = ${user_id} deleted`})
+        response.status(204).json({ "status": `user with id = ${user_id} deleted`})
     }
     else {
         response.status(404).json({ "error": `cannot find user with id ${user_id}`})
